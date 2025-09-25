@@ -44,13 +44,13 @@ export function ChartAreaInteractive() {
   }, [timeRange]);
 
   return (
-    <Card className="flex flex-col w-full bg-[#546862] backdrop-blur-md border border-white/20 shadow-lg p-6">
+    <Card className="flex flex-col w-full bg-[#7DA77D] backdrop-blur-md border border-white/20 shadow-2xl shadow-black/40 p-6">
     <Card className="pt-0">
       <CardHeader className="flex items-center gap-2 border-b py-5 sm:flex-row">
         <div className="flex-1">
-          <CardTitle>Area Chart - Interactive</CardTitle>
+          <CardTitle>Grafica Interactiva</CardTitle>
           <CardDescription>
-            Showing total visitors for the selected period
+            Periodo de la calidad del agua
           </CardDescription>
         </div>
 
@@ -60,9 +60,9 @@ export function ChartAreaInteractive() {
           onChange={(e) => setTimeRange(e.target.value)}
           className="ml-auto rounded-lg border px-2 py-1"
         >
-          <option value="7d">Last 7 days</option>
-          <option value="30d">Last 30 days</option>
-          <option value="90d">Last 3 months</option>
+          <option value="7d">Ultimos 7 dias</option>
+          <option value="30d">Ultimos 30 dias</option>
+          <option value="90d">Ultimos 3 meses</option>
         </select>
       </CardHeader>
 

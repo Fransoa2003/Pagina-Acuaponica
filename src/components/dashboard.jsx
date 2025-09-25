@@ -4,15 +4,16 @@ import { Temperatura } from "./temperatura";
 import { Conductividad } from "./conductividad";
 import { Solidos } from "./solidos";
 import img from "../assets/Sora-Logo.png";
+import planta from "../assets/planta.jpg";
 import { ChartAreaInteractive } from "./chartAreaInteractive";
 
 export const Dashboard = () => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#314c53] to-[#010300]">
+    <div className="min-h-screen bg-gradient-to-b from-[#acce91] to-[#efeae4]">
       {/* NAVBAR */}
-      <nav className="relative bg-gray-800/50 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10 z-10">
+      <nav className="relative bg-[#373737] after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10 z-10">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
             {/* Logo */}
@@ -33,13 +34,13 @@ export const Dashboard = () => {
                     aria-current="page"
                     className="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white"
                   >
-                    Dashboard
+                    Centro de datos
                   </a>
                   <a
                     href="#"
                     className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
                   >
-                    Team
+                    Equipo
                   </a>
                   
                 </div>
@@ -75,7 +76,7 @@ export const Dashboard = () => {
                   <span className="sr-only">Open user menu</span>
                   <img
                     className="h-10 w-10 rounded-full object-cover"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e"
+                    src={planta}
                     alt="User"
                   />
                 </button>
