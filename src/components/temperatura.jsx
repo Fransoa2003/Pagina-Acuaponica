@@ -35,7 +35,7 @@ export const Temperatura = () => {
         
           // ---- render ----
           return (
-              <Card className="flex flex-col max-w-sm w-full h-[150px] bg-[#7DA77D] backdrop-blur-md border border-white/20 shadow-2xl shadow-black/40 ">
+              <Card className="flex flex-col max-w-sm w-full h-[150px] bg-[#287b60] backdrop-blur-md border border-white/20 shadow-2xl shadow-black/40 ">
                 <CardContent className="flex flex-1 items-center pb-0">
                   <ChartContainer
                     config={chartConfig}
@@ -67,7 +67,7 @@ export const Temperatura = () => {
                                   <tspan
                                     x={viewBox.cx}
                                     y={(viewBox.cy || 0) + 4}
-                                    className="fill-white/70"
+                                    className="fill-white"
                                   >
                                     Temperatura
                                   </tspan>

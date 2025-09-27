@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export const Register = () => {
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-[#acce91] to-[#efeae4]">
+        <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-[#c4fde5] to-[#F2ECE9]">
             <div className="absolute top-4 left-4">
                 <img
                     src="/src/assets/Sora-Logo.png"
@@ -11,9 +11,9 @@ export const Register = () => {
                     className="h-18 w-auto"
                 />
             </div>
-            <div className="flex flex-col justify-center w-full max-w-md rounded-xl px-8 py-10  bg-[#7DA77D] text-white text-sm">
+            <div className="flex flex-col justify-center w-full max-w-md rounded-xl px-8 py-10  bg-[#287b60] text-white text-sm">
                 <h2 className="text-2xl font-semibold">Registrate</h2>
-                <p className="text-[#465344] mt-1">Registrate para tu nueva cuenta</p>
+                <p className="text-[#c4fde5] mt-1">Registrate para tu nueva cuenta</p>
                 <form className="mt-8">
                 <label htmlFor="userName" className="block mb-1 font-medium text-white">
                     Nombre de usuario
@@ -59,7 +59,7 @@ export const Register = () => {
 
                 <div className="text-right mt-2">
                     <p>¿Ya tienes Cuenta?</p>
-                    <h4><NavLink to='/' className="font-medium text-[#465344] hover:text-[#bbdec6]">
+                    <h4><NavLink to='/' className="font-medium text-[#c4fde5] hover:text-[#66D962]">
                         Iniciar Sesión
                     </NavLink></h4>
                     
@@ -67,7 +67,7 @@ export const Register = () => {
 
                 <button
                     type="submit"
-                    className="w-full mt-10 px-4 py-2.5 font-medium text-white bg-[#373737] rounded-md hover:bg-[#4C6948] focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full mt-10 px-4 py-2.5 font-medium text-white bg-[#062319] rounded-md hover:bg-[#113f30] focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
                     Registrar
                 </button>

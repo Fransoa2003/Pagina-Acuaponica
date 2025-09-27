@@ -28,7 +28,7 @@ const chartData = Array.from({ length: 90 }).map((_, i) => {
 
 // Configuración de colores
 const chartConfig = {
-  desktop: { label: "water quality", color: "var(--chart-1)" },
+  desktop: { label: "Calidad del agua", color: "var(--chart-3)" },
 };
 
 export function ChartAreaInteractive() {
@@ -44,7 +44,7 @@ export function ChartAreaInteractive() {
   }, [timeRange]);
 
   return (
-    <Card className="flex flex-col w-full bg-[#7DA77D] backdrop-blur-md border border-white/20 shadow-2xl shadow-black/40 p-6">
+    <Card className="flex flex-col w-full bg-[#287b60] backdrop-blur-md border border-white/20 shadow-2xl shadow-black/40 p-6">
     <Card className="pt-0">
       <CardHeader className="flex items-center gap-2 border-b py-5 sm:flex-row">
         <div className="flex-1">
@@ -71,7 +71,7 @@ export function ChartAreaInteractive() {
           <AreaChart data={filteredData} width={600} height={250}>
             <defs>
               <linearGradient id={`fillDesktop-${timeRange}`} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.8} />
+                <stop offset="50%" stopColor="var(--chart-3)" stopOpacity={0.8} />
                 <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0.1} />
               </linearGradient> 
             </defs>
@@ -109,7 +109,7 @@ export function ChartAreaInteractive() {
               dataKey="desktop"
               type="natural"
               fill={`url(#fillDesktop-${timeRange})`}
-              stroke="var(--chart-1)"
+              stroke="var(--chart-3)"
               stackId="a"
             />
            

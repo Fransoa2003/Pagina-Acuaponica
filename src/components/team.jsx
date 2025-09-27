@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import img from "../assets/Sora-Logo.png";
 import planta from "../assets/planta.jpg";
-import imgFransoa from "../assets/img-fransoa.png"
+import imgFransoa from "../assets/Francisco-Img.png"
+import imgEmmanuel from "../assets/Emmanuel-Img.png"
 import { NavLink } from "react-router-dom";
 
 
@@ -106,9 +107,18 @@ export const Team = () => {
                     </div>
                 </div>
             </nav>
-            <img src={imgFransoa} alt=""  className=" h-64 object-cover 
+            {/* Contenido principal */}
+            <div className="flex flex-col  max-w-sm w-full bg-black items-center">
+                <img src={imgFransoa} alt=""  className=" h-64 object-cover 
              [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] 
              [mask-repeat:no-repeat] [mask-size:100%_100%]"/>
+            </div>
+            <div className="flex flex-col  max-w-sm w-full bg-black items-center">
+                <img src={imgEmmanuel} alt=""  className=" h-64 object-cover 
+             [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] 
+             [mask-repeat:no-repeat] [mask-size:100%_100%] "/>
+            </div>
+            
         </div>
     );
 }
