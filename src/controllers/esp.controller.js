@@ -2,7 +2,7 @@ import { createAccessToken } from "../lib/jwt.js";
 // import EspModel from "../models/esp.model.js";
 import Esp from "../models/esp.model.js";
 
-export const cargarDatos = async (req,res) => {
+export const guardarDatos = async (req,res) => {
 
     const {ph,temperatura,solidosdisueltos,conductividad,producto} = req.body;
 
@@ -25,6 +25,11 @@ export const cargarDatos = async (req,res) => {
     }
 };
 
-export const pruebaEsp = async (req,res) => {
-    res.status(200).send("hecho");
+export const obtenerDatos = async (req,res) => {
+    try{
+        const documentos = await Esp.find({});
+        res.status(200).json({valor: documentos})
+    }catch(err){
+        res.status(500).send(err.message);
+    }
 };
