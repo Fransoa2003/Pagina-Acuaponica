@@ -9,8 +9,9 @@ import { NavLink } from "react-router-dom";
 export const Team = () => {
     const [userMenuOpen, setUserMenuOpen] = useState(false);
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[#acce91] to-[#efeae4]">
+        <div className="min-h-screen bg-gradient-to-b from-[#c4fde5] to-[#efeae4]">
             {/* NAVBAR */}
+            
             <nav className="relative bg-[#373737] after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10 z-10">
                 <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                     <div className="relative flex h-16 items-center justify-between">
@@ -108,15 +109,17 @@ export const Team = () => {
                 </div>
             </nav>
             {/* Contenido principal */}
-            <div className="flex flex-col  max-w-sm w-full bg-black items-center">
+            <div className="flex flex-nowrap bg-red">
+            <div className="bg-black">
                 <img src={imgFransoa} alt=""  className=" h-64 object-cover 
-             [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] 
-             [mask-repeat:no-repeat] [mask-size:100%_100%]"/>
-            </div>
-            <div className="flex flex-col  max-w-sm w-full bg-black items-center">
+                [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] 
+                [mask-repeat:no-repeat] [mask-size:100%_100%]"/>
+             </div>
+             <div className="bg-black">
                 <img src={imgEmmanuel} alt=""  className=" h-64 object-cover 
-             [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] 
-             [mask-repeat:no-repeat] [mask-size:100%_100%] "/>
+                [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] 
+                [mask-repeat:no-repeat] [mask-size:100%_100%] "/>
+             </div>
             </div>
             
         </div>

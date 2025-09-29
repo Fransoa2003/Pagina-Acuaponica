@@ -6,10 +6,28 @@ import { Solidos } from "./solidos";
 import img from "../assets/Sora-Logo.png";
 import planta from "../assets/planta.jpg";
 import { ChartAreaInteractive } from "./chartAreaInteractive";
+import { useNavigate } from "react-router-dom";
 
 export const Dashboard = () => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("http://192.168.0.113:3001/api/logout", {
+        method: "POST", 
+        credentials: "include",
+      });
 
+      if (res.ok) {
+        navigate("/");
+      } else {
+        alert("Error al cerrar sesión");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error de conexión con el servidor");
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#c4fde5] to-[#efeae4]">
       {/* NAVBAR */}
@@ -25,7 +43,6 @@ export const Dashboard = () => {
                   className="h-10 w-auto"
                 />
               </div>
-
               {/* Links */}
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
@@ -36,38 +53,12 @@ export const Dashboard = () => {
                   >
                     Centro de datos
                   </a>
-                  <a
-                    href="#"
-                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
-                  >
-                    Equipo
-                  </a>
-                  
                 </div>
               </div>
             </div>
 
-            {/* Perfil / Notificaciones */}
+            {/* Perfil*/}
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              {/* Notificaciones */}
-              <button className="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
-                <span className="sr-only">View notifications</span>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  className="w-6 h-6"
-                >
-                  <path
-                    d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-
-              {/* Dropdown de usuario */}
               <div className="relative ml-3">
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
@@ -85,32 +76,20 @@ export const Dashboard = () => {
                   <div className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-gray-800 py-1 shadow-lg ring-1 ring-white/10 z-50">
                     <a
                       href="#"
+                      onClick={handleLogout}
                       className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5"
                     >
-                      Your profile
-                    </a>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5"
-                    >
-                      Settings
-                    </a>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5"
-                    >
-                      Sign out
+                      Cerrar sesión
                     </a>
                   </div>
                 )}
               </div>
-
             </div>
           </div>
         </div>
       </nav>
 
-      {/* DASHBOARD GRID */}
+      {/* Graficas de sensores*/}
       <div className="flex items-center justify-center p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl">
           <Ph />
