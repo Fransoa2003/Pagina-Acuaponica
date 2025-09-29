@@ -27,7 +27,7 @@ export const guardarDatos = async (req,res) => {
 
 export const obtenerDatos = async (req,res) => {
     try{
-        const documentos = await Esp.find({});
+        const documentos = await Esp.find({}).limit(25);
         res.status(200).json({valor: documentos})
     }catch(err){
         res.status(500).send(err.message);
