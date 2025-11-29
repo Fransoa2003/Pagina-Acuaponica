@@ -4,16 +4,17 @@ import Esp from "../models/esp.model.js";
 
 export const guardarDatos = async (req,res) => {
 
-    const {ph,temperatura,solidosdisueltos,conductividad,producto} = req.body;
-
+    const {ph,temperatura,solidosdisueltos,conductividad,producto,temperturaactivo} = req.body;
     try
     {
+        //Nota: Los atributos del modelo (Esp) deben de nombrarse de la misma manera en la cual se nombra en las coleccion de la base de datos
         const newRegisterEsp = new Esp({
             ph,
             temperatura,
             solidosdisueltos,
             conductividad,
-            producto
+            producto,
+            temperturaactivo
         });
 
         const registerEsp = await newRegisterEsp.save();
@@ -33,3 +34,4 @@ export const obtenerDatos = async (req,res) => {
         res.status(500).send(err.message);
     }
 };
+

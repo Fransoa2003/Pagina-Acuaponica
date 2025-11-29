@@ -20,9 +20,18 @@ const EspSchema = new mongoose.Schema({
     producto:{
         type: String,
         required: true
+    },
+    temperturaactivo:{
+        type: Boolean,
+        required: true
     }
 },{
     timestamps:true
 });
+
+//Primer argumento: nombre del modelo (Mongoose lo pluraliza para la colección)
+//Segundo: el esquema
+//(opcional) Tercer argumento: nombre exacto de la colección
+//export const Sensor = mongoose.model("Sensor", sensorSchema, "lecturas_sensores");
 
 export default mongoose.model("Esp",EspSchema);

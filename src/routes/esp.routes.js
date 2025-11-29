@@ -5,5 +5,6 @@ const router = Router();
 
 router.post('/enviar-datos',guardarDatos);
 router.get('/traer-datos',obtenerDatos);
+// router.get('/consultar-ip',obtenerIP);
 
 export default router;
