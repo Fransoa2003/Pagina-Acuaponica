@@ -16,31 +16,56 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart";
+// ... imports ...
+
 export const Conductividad = () => {
-  const [condu,setCondu] = React.useState([]);
-  let color = '';
-  if(condu > 200 ){
-    color='#F54927';
-  }else{
-    color = "var(--chart-2)";
-  } 
+  const [condu, setCondu] = React.useState(0);
+  
+  // Determinamos el color basado en el estado actual
+  const color = condu > 200 ? '#F54927' : "var(--chart-2)";
+
+  async function enviarAlerta(valor) {
+    try {
+      // Nota la URL corregida
+      await fetch(`${HOST_SERVER}/api/email/send-alert`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ conductividad: valor })
+      });
+    } catch (error) {
+      console.error("Error enviando alerta:", error);
+    }
+  }
+
   React.useEffect(() => {
     async function fetchData() {
       try {
-        const conductividadAlm = await fetch(`${HOST_SERVER}/api/esp/traer-datos`).then(respuesta => respuesta.json());
-        let datos = conductividadAlm.valor;
-        datos.map((dato) => {
-        // console.log(Object.values(dato.temperatura)[0]);
-          setCondu(dato.conductividad);
-          // console.log(dato.temperatura);
-        });
+        const respuesta = await fetch(`${HOST_SERVER}/api/esp/traer-datos`);
+        const dataJson = await respuesta.json();
+        
+        // Asumiendo que 'valor' es un array, tomamos el ÚLTIMO dato (el más reciente)
+        // Si tu API devuelve los datos al revés (el 0 es el más reciente), usa datos[0]
+        const datos = dataJson.valor;
+        
+        if (datos && datos.length > 0) {
+            // Tomamos el último registro ingresado
+            const ultimoDato = datos[datos.length - 1]; 
+            const valorConductividad = Number(ultimoDato.conductividad);
+
+            setCondu(valorConductividad);
+
+            // Solo intentamos enviar la alerta con el dato más reciente
+            
+            enviarAlerta(valorConductividad); 
+        }
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     }
+
     fetchData();
-    // vuelve a consultar cada 3s
-    const interval = setInterval(fetchData, 3000); 
+    const interval = setInterval(fetchData, 3000);
     return () => clearInterval(interval);
   }, []);
   const chartData = [{ month: "january", conductividad: condu, conductividadMax: 800-condu }];

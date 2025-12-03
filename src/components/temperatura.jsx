@@ -1,6 +1,6 @@
 import React from "react";
 import { TrendingUp } from "lucide-react";
-import { HOST_SERVER } from "@/config";
+import { HOST_SERVER } from "@/config"; // Tu configuración original
 import { Label, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts";
 
 import {
@@ -18,44 +18,72 @@ import {
 } from "@/components/ui/chart";
 
 export const Temperatura = () => {
-  const [temp,setTemp] = React.useState([]);
-  let color = '';
-  if(temp > 34 ){
-    color='#F54927';
-  }else{
-    color = "var(--chart-2)";
-  } 
+  const [temp, setTemp] = React.useState(0);
+  
+  // Color rojo si es > 34, gris si es normal
+  const color = temp > 34 ? '#F54927' : "var(--chart-2)";
+
+  // Función para reportar al Backend
+  async function enviarAlerta(valor) {
+    try {
+      // Enviamos el dato SIEMPRE.
+      await fetch(`${HOST_SERVER}/api/email/send-alert`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ temperatura: valor })
+      });
+    } catch (error) {
+      console.error("Error reportando temperatura:", error);
+    }
+  }
+
   React.useEffect(() => {
     async function fetchData() {
       try {
-        const registrosAlmacenados = await fetch(`${HOST_SERVER}/api/esp/traer-datos`).then(respuesta => respuesta.json());
-        let datos = registrosAlmacenados.valor;
-        datos.map((dato) => {
-        // console.log(Object.values(dato.temperatura)[0]);
-          setTemp(dato.temperatura);
-          // console.log(dato.temperatura);
-        });
+        const respuesta = await fetch(`${HOST_SERVER}/api/esp/traer-datos`);
+        
+        // Si hay error de red, paramos aquí para no romper el código
+        if (!respuesta.ok) return;
+
+        const dataJson = await respuesta.json();
+        const datos = dataJson.valor;
+        
+        if (datos && Array.isArray(datos) && datos.length > 0) {
+           // Tomamos el último dato
+           const ultimoDato = datos[datos.length - 1];
+           const valorTemp = Number(ultimoDato.temperatura);
+
+           if (!isNaN(valorTemp)) {
+             setTemp(valorTemp);
+             
+             // IMPORTANTE: Llamamos a la función SIEMPRE.
+             enviarAlerta(valorTemp);
+           }
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     }
-    fetchData();
-    const interval = setInterval(fetchData, 3000); 
+
+    fetchData(); // Ejecutar inmediatamente
+    const interval = setInterval(fetchData, 3000); // Repetir cada 3s
     return () => clearInterval(interval);
   }, []);
-  // ---- datos para la gráfica ----
-  const chartData = [{ month: "january", temperatura: temp, TempeMax: 50-temp }];
+
+  // Configuración de la gráfica
+  const chartData = [{ month: "actual", temperatura: temp, TempeMax: 50 - temp }];
 
   const chartConfig = {
     desktop: {
-      label: "TEMPERATURA TOTAL",
+      label: "Temperatura",
       color: "var(--chart-1)",
     },
     mobile: {
-      label: "LIMITE MAXIMO",
+      label: "Máximo",
       color: "var(--chart-2)",
     },
   };
+
   return (
       <Card className="flex flex-col max-w-sm w-full h-[150px] bg-[#FFFFFF] backdrop-blur-md border border-white/20 shadow-2xl shadow-black/40 ">
         <CardContent className="flex flex-1 items-center pb-0">
@@ -84,7 +112,7 @@ export const Temperatura = () => {
                             y={(viewBox.cy || 0) - 16}
                             className="fill-black text-2xl font-bold"
                           >
-                            {temp}
+                            {temp}°
                           </tspan>
                           <tspan
                             x={viewBox.cx}
@@ -100,6 +128,7 @@ export const Temperatura = () => {
                   }}
                 />
               </PolarRadiusAxis>
+              
               <RadialBar
                 dataKey="TempeMax"
                 fill="var(--chart-1)"
@@ -107,6 +136,7 @@ export const Temperatura = () => {
                 cornerRadius={5}
                 className="stroke-transparent stroke-2"
               />
+              
               <RadialBar
                 dataKey="temperatura"
                 stackId="a"

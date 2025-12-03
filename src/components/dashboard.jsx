@@ -13,7 +13,7 @@ export const Dashboard = () => {
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
-      const res = await fetch("http://192.168.0.113:3001/api/logout", {
+      const res = await fetch("http://162.16.15.91:3001/api/logout", {
         method: "POST", 
         credentials: "include",
       });
