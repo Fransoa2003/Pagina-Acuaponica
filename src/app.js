@@ -27,7 +27,6 @@ app.use(cookieParser());
 app.use(cors({
     origin: ['http://162.16.15.91:5173','http://localhost:5173'],
     // origin: ['http://sora-production-8887.up.railway.app:5173'],
-    origin: ['http://10.0.2.27:5173'],
     methods: ['GET','POST','PUT','DELETE'],
     credentials: true
 }));
