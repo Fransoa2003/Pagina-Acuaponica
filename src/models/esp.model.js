@@ -21,7 +21,7 @@ const EspSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    temperturaactivo:{
+    calentadoractivo:{
         type: Boolean,
         required: true
     }

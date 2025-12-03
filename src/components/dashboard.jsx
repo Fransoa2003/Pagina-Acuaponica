@@ -7,13 +7,14 @@ import img from "../assets/Sora-Logo.png";
 import planta from "../assets/planta.jpg";
 import { ChartAreaInteractive } from "./chartAreaInteractive";
 import { useNavigate } from "react-router-dom";
+import { HOST } from "@/config";
 
 export const Dashboard = () => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
-      const res = await fetch("http://192.168.0.113:3001/api/logout", {
+      const res = await fetch(`http://${HOST}:3001/api/logout`, {
         method: "POST", 
         credentials: "include",
       });
@@ -52,6 +53,13 @@ export const Dashboard = () => {
                     className="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white"
                   >
                     Centro de datos
+                  </a>
+                  <a
+                    href="http://192.168.16.120"
+                    aria-current="page"
+                    className="rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white"
+                  >
+                    Camara
                   </a>
                 </div>
               </div>

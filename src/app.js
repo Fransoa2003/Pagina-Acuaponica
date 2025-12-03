@@ -7,6 +7,8 @@ import authRoutes from './routes/auth.routes.js';
 import espRoutes from './routes/esp.routes.js';
 import { createServer } from 'vite';
 
+import { HOST } from './config.js';
+
 const app = express();
 
 app.use(morgan('dev'));
@@ -25,7 +27,7 @@ app.use(cookieParser());
 //HABILITAMOS LA ENTRADA DE ORIGEN DE PETICION A LA DIRECCION DEL SERVIDOR
 app.use(cors({
     // origin: ['http://sora-production-8887.up.railway.app:5173'],
-    origin: ['http://10.0.2.27:5173'],
+    origin: [`http://${HOST}:5173`],
     methods: ['GET','POST','PUT','DELETE'],
     credentials: true
 }));
