@@ -26,7 +26,6 @@ app.use(cookieParser());
 //HABILITAMOS LA ENTRADA DE ORIGEN DE PETICION A LA DIRECCION DEL SERVIDOR
 app.use(cors({
     origin: ['http://162.16.15.91:5173','http://localhost:5173'],
-    // origin: ['http://sora-production-8887.up.railway.app:5173'],
     methods: ['GET','POST','PUT','DELETE'],
     credentials: true
 }));

@@ -1,5 +1,5 @@
 import { createAccessToken } from "../lib/jwt.js";
-// import EspModel from "../models/esp.model.js";
+// import EspModel from "../models/esp.model.js"; 
 import Esp from "../models/esp.model.js";
 
 export const guardarDatos = async (req,res) => {
@@ -28,10 +28,18 @@ export const guardarDatos = async (req,res) => {
 
 export const obtenerDatos = async (req,res) => {
     try{
-        const documentos = await Esp.find({}).limit(25);
-        res.status(200).json({valor: documentos})
+        // CORRECCIÓN IMPORTANTE:
+        // 1. .sort({ _id: -1 }): Ordena del más nuevo al más viejo.
+        // 2. .limit(25): Toma solo los últimos 25.
+        const documentosRecientes = await Esp.find({}).sort({ _id: -1 }).limit(25);
+        
+        // 3. .reverse(): Invertimos el array para enviarlo cronológicamente (antiguo -> nuevo)
+        // Esto permite que tu frontend siga usando "datos[datos.length - 1]" para ver el último.
+        const documentosOrdenados = documentosRecientes.reverse();
+
+        res.status(200).json({valor: documentosOrdenados});
+        
     }catch(err){
         res.status(500).send(err.message);
     }
 };
-
